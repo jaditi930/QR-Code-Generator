@@ -4,7 +4,8 @@ import os
 from tkinter import *
 from PIL import Image,ImageTk
 qr_path=os.getcwd()+"\myqr.png"
-
+global c
+c=1
 def getVals():
     global s
     s=stringurl.get()
@@ -14,11 +15,13 @@ def getVals():
     image.config(file=f"{qr_path}")
 
 def dwld():
+    global c
     folder=filedialog.askdirectory()
     cur_path=os.getcwd()
     os.chdir(folder)
     qr=Image.open(f"{qr_path}") 
-    qr=qr.save("qrimage.jpg")
+    qr=qr.save(f"qrimage-{c}.jpg")
+    c+=1
     os.chdir(cur_path)
 window=Tk()
 window.geometry("644x434")
